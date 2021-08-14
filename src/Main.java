@@ -48,6 +48,10 @@ public class Main {
         uRes[i].setQuota(scFile.nextInt());
       }
 
+      for(int i = 0; i< ur; i ++) {
+        uRes[i].setCoords(scFile.next());
+      }
+
 
     } catch (FileNotFoundException e) {
       System.out.println("FIle is not found!");
