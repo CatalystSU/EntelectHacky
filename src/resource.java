@@ -22,9 +22,16 @@ public class resource {
     return this.numResources;
   }
 
-  public void setResources(int taken) {
-    this.numResources -= taken;
+  /**
+   * Changes the resources that have been picked up by the ship
+   * @param cluster - Which cluster the ship is at
+   * @param taken - The amount of resources the ship has taken.
+   */
+  public void setResources(int cluster, int taken) {
+    clust[cluster][3] -= taken;
   }
+
+
 
   public void setCoords(String line) {
     // assigning the clusters here
