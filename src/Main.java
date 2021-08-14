@@ -54,13 +54,14 @@ public class Main {
 
       int temp_cap = 0;
       int temp_quota = 0;
-      System.out.println(uRes[0].getCluser()[0][3]);
+      boolean limit = false;
+
       // string array for each ship
       String[] paths = new String[s];
       for (int i = 0; i < s; i++) {
         paths[i] = "";
       }
-      System.out.println(paths.length);
+
       for (int i = 0; i < s; i++) {
         temp_cap = 0;
         // for each resource type loop
@@ -70,23 +71,33 @@ public class Main {
             // 0 to 100
             // go to each cluster and attempt to collect said resource
             // at 5000 go back to the station
-            if (temp_cap - uRes[j].getCluser()[k][3] < c) {
-              // attempt to gather resources
-              temp_cap += uRes[j].getCluser()[k][3];
-              uRes[j].setResources(k,temp_cap);
-              //System.out.println(uRes[j].getC()+""+k+",");
-              paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
-            } 
-            //if (temp_cap >= c) {
-              //break;
-            //}
+            if (uRes[j].availableResources(k) > 0) {
+              if (temp_cap - uRes[j].getCluser()[k][3] < c) {
+                // attempt to gather resources
+                temp_cap += uRes[j].getCluser()[k][3];
+                uRes[j].setResources(k , uRes[j].getCluser()[k][3]);
+                paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
+              } else {
+                limit = true;
+                break;
+              }
+              
+            }
+
           }
-          //System.out.println(j);
-         
+          if (limit) {
+            limit = false;
+            break;
+          }
+
         }
-        //}
       }
-      System.out.println(paths[1]);
+      for (int i = 0; i < s; i++) {
+        paths[i] = paths[i].concat("0");
+        System.out.println(paths[i]);
+      }
+      
+      
     } catch (FileNotFoundException e) {
       System.out.println("FIle is not found!");
     }
