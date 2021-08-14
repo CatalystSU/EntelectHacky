@@ -63,7 +63,7 @@ public class Main {
         paths[i] = "";
       }
 
-      for(int x = 0; x < 3; x++) {
+      for(int x = 0; x < 50; x++) {
       for (int i = 0; i < s; i++) {
         temp_cap = 0;
         // for each resource type loop
@@ -80,7 +80,7 @@ public class Main {
                 uRes[j].setResources(k, uRes[j].getCluser()[k][3]);
                 paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
               } else {
-                paths[i] = paths[i].concat("0");
+                paths[i] = paths[i].concat("0,");
                 //soft_cap += temp_cap;
                 limit = true;
                 break;
@@ -97,7 +97,15 @@ public class Main {
         }
       }
       for (int i = 0; i < s; i++) {
-        //paths[i] = paths[i].concat("0");
+        if (!paths[i].equals("")) {
+          
+          if (!paths[i].substring(paths[i].length()-1,paths[i].length()).equals("0")) {
+            paths[i] = paths[i].concat("0");
+          } else {
+            paths[i] = paths[i].substring(0, paths[i].length()-1);
+          }
+        }
+        
         System.out.println(paths[i]);
       }
 
