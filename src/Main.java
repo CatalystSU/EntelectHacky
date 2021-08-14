@@ -54,6 +54,7 @@ public class Main {
 
       int temp_cap = 0;
       int temp_quota = 0;
+      int soft_cap = t / s;
       boolean limit = false;
 
       // string array for each ship
@@ -78,6 +79,8 @@ public class Main {
                 uRes[j].setResources(k , uRes[j].getCluser()[k][3]);
                 paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
               } else {
+                paths[i] = paths[i].concat("0");
+                //soft_cap += temp_cap;
                 limit = true;
                 break;
               }
@@ -93,7 +96,7 @@ public class Main {
         }
       }
       for (int i = 0; i < s; i++) {
-        paths[i] = paths[i].concat("0");
+        //paths[i] = paths[i].concat("0");
         System.out.println(paths[i]);
       }
       
