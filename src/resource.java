@@ -2,14 +2,31 @@ public class resource {
   private int id, numResources, quota;
   private char c;
   private int[][] clust;
-  private boolean hasRes[];
-  private int required;
+  private boolean hasRes[], complete = false;
+  private int required, collected;
 
 
   public resource(int id, int numResources) {
     this.id = id;
     c = (char) (id + 96);
     this.numResources = numResources;
+  }
+
+  public boolean getCompleted() {
+    return complete;
+  }
+
+  /**
+   * Seeing what is collected.
+   * @param taken - int of what was taken
+   */
+  public void resourcesCollected(int taken) {
+    collected += taken;
+    if (collected > required) {
+      complete = true;
+    } else {
+      complete = false;
+    }
   }
 
   /**
@@ -81,6 +98,7 @@ public class resource {
     if (clust[cluster][3] == 0) {
       hasRes[cluster] = false;
     }
+    resourcesCollected(taken);
   }
 
   /**
