@@ -18,6 +18,7 @@ public class resource {
 
   /**
    * Seeing what is collected.
+   *
    * @param taken - int of what was taken
    */
   public void resourcesCollected(int taken) {
@@ -46,7 +47,7 @@ public class resource {
   public int getQuota() {
     return this.quota;
   }
-  
+
   public char getC() {
     return this.c;
   }

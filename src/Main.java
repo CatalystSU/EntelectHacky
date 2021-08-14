@@ -43,12 +43,12 @@ public class Main {
       scLine.close();
 
       // reading in the quota.
-      for(int i = 0; i< ur; i++) {
+      for (int i = 0; i < ur; i++) {
         scFile.next();
         uRes[i].setQuota(scFile.nextInt());
       }
 
-      for(int i = 0; i< ur; i ++) {
+      for (int i = 0; i < ur; i++) {
         uRes[i].setCoords(scFile.next());
       }
 
@@ -63,49 +63,49 @@ public class Main {
         paths[i] = "";
       }
 
-      for(int x = 0; x < 50; x++) {
-      for (int i = 0; i < s; i++) {
-        temp_cap = 0;
-        // for each resource type loop
-        for (int j = uRes.length-1; j > 0; j--) {
-          // for each cluster loop
-          for (int k = 0; k < uRes[j].getCluser().length; k++) {
-            // 0 to 100
-            // go to each cluster and attempt to collect said resource
-            // at 5000 go back to the station
-            if (uRes[j].availableResources(k) > 0) {
-              if (temp_cap - uRes[j].getCluser()[k][3] < c) {
-                // attempt to gather resources
-                temp_cap += uRes[j].getCluser()[k][3];
-                uRes[j].setResources(k, uRes[j].getCluser()[k][3]);
-                paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
-              } else {
-                paths[i] = paths[i].concat("0,");
-                //soft_cap += temp_cap;
-                limit = true;
-                break;
+      for (int x = 0; x < 50; x++) {
+        for (int i = 0; i < s; i++) {
+          temp_cap = 0;
+          // for each resource type loop
+          for (int j = uRes.length - 1; j > 0; j--) {
+            // for each cluster loop
+            for (int k = 0; k < uRes[j].getCluser().length; k++) {
+              // 0 to 100
+              // go to each cluster and attempt to collect said resource
+              // at 5000 go back to the station
+              if (uRes[j].availableResources(k) > 0) {
+                if (temp_cap - uRes[j].getCluser()[k][3] < c) {
+                  // attempt to gather resources
+                  temp_cap += uRes[j].getCluser()[k][3];
+                  uRes[j].setResources(k, uRes[j].getCluser()[k][3]);
+                  paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
+                } else {
+                  paths[i] = paths[i].concat("0,");
+                  //soft_cap += temp_cap;
+                  limit = true;
+                  break;
+                }
+
               }
 
             }
-
+            if (limit) {
+              limit = false;
+              break;
+            }
           }
-          if (limit) {
-            limit = false;
-            break;
-          }
-        }
         }
       }
       for (int i = 0; i < s; i++) {
         if (!paths[i].equals("")) {
-          
-          if (!paths[i].substring(paths[i].length()-1,paths[i].length()).equals("0")) {
+
+          if (!paths[i].substring(paths[i].length() - 1, paths[i].length()).equals("0")) {
             paths[i] = paths[i].concat("0");
           } else {
-            paths[i] = paths[i].substring(0, paths[i].length()-1);
+            paths[i] = paths[i].substring(0, paths[i].length() - 1);
           }
         }
-        
+
         System.out.println(paths[i]);
       }
 
