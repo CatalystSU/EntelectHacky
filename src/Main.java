@@ -35,12 +35,17 @@ public class Main {
       uRes = new resource[ur];
       line = scFile.nextLine();
       scLine = new Scanner(line);
+
       for (int i = 0; i < ur; i++) {
         String res = scLine.next();
-        System.out.println(res + " resource");
+        int id = Integer.parseInt(res.substring(0, res.indexOf(",")));
+        int numRes = Integer.parseInt(res.substring(res.indexOf(",") + 1));
+        uRes[i] = new resource(id, numRes);
       }
-      System.out.println(scLine.next());
+      scLine.close();
 
+      // reading in the quota.
+      
 
     } catch (FileNotFoundException e) {
       System.out.println("FIle is not found!");
