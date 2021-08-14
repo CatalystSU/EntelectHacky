@@ -11,14 +11,34 @@ public class resource {
     this.numResources = numResources;
   }
 
+  /**
+   * Sets the quota for instantiating the amount of this resource needed
+   * @param q integer from the text file.
+   */
   public void setQuota(int q) {
     this.quota = q;
   }
 
+  /**
+   * Gets the quota
+   * @return the quota
+   */
+  public int getQuota() {
+    return this.quota;
+  }
+
+  /**
+   * Gets the ID of the cluster
+   * @return the id
+   */
   public int getId() {
     return this.id;
   }
 
+  /**
+   * Get the number of different clusters there are.
+   * @return number of clusters
+   */
   public int getResources() {
     return this.numResources;
   }
