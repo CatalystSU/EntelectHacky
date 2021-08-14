@@ -23,6 +23,14 @@ public class resource {
   }
 
   /**
+   * Getting the cluster for this resource
+   * @return 2D array of the cluster
+   */
+  public int[][] getCluser() {
+    return clust;
+  }
+
+  /**
    * Changes the resources that have been picked up by the ship
    * @param cluster - Which cluster the ship is at
    * @param taken - The amount of resources the ship has taken.
