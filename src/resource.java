@@ -29,6 +29,10 @@ public class resource {
   public int getQuota() {
     return this.quota;
   }
+  
+  public char getC() {
+    return this.c;
+  }
 
   /**
    * number of resource that is required to be fetched.
