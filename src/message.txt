@@ -1,4 +1,4 @@
-import java.io.File;
+```import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -84,7 +84,7 @@ public class Main {
                 limit = true;
                 break;
               }
-
+              
             }
 
           }
@@ -99,10 +99,11 @@ public class Main {
         //paths[i] = paths[i].concat("0");
         System.out.println(paths[i]);
       }
-
-
+      
+      
     } catch (FileNotFoundException e) {
       System.out.println("FIle is not found!");
     }
   }
 }
+```
