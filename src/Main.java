@@ -64,42 +64,42 @@ public class Main {
         paths[i] = "";
       }
 
-      for (int i = 0; i < s; i++) {
-        temp_cap = 0;
-        // for each resource type loop
-        for (int j = uRes.length - 1; j > 0; j--) {
-          // for each cluster loop
-          for (int k = 0; k < uRes[j].getCluser().length; k++) {
-            // 0 to 100
-            // go to each cluster and attempt to collect said resource
-            // at 5000 go back to the station
-            if (uRes[j].availableResources(k) > 0) {
-              if (temp_cap - uRes[j].getCluser()[k][3] < c) {
-                // attempt to gather resources
-                temp_cap += uRes[j].getCluser()[k][3];
-                uRes[j].setResources(k, uRes[j].getCluser()[k][3]);
-                paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
-              } else {
-                paths[i] = paths[i].concat("0");
-                //soft_cap += temp_cap;
-                limit = true;
-                break;
+      for(int x = 0; x < numTrips/4; x++) {
 
+        for (int i = 0; i < s; i++) {
+          temp_cap = 0;
+          // for each resource type loop
+          for (int j = uRes.length - 1; j > 0; j--) {
+            // for each cluster loop
+            for (int k = 0; k < uRes[j].getCluser().length; k++) {
+              // 0 to 100
+              // go to each cluster and attempt to collect said resource
+              // at 5000 go back to the station
+              if (uRes[j].availableResources(k) > 0) {
+                if (temp_cap - uRes[j].getCluser()[k][3] < c) {
+                  // attempt to gather resources
+                  temp_cap += uRes[j].getCluser()[k][3];
+                  uRes[j].setResources(k, uRes[j].getCluser()[k][3]);
+                  paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
+                } else {
+                  //paths[i] = paths[i].concat("0");
+                  //soft_cap += temp_cap;
+                  limit = true;
+                  break;
+                }
+              }
+              if (limit) {
+                limit = false;
+                break;
               }
             }
-            if (limit) {
-              limit = false;
-              break;
-            }
-
           }
         }
+        for (int i = 0; i < s; i++) {
+          paths[i] = paths[i].concat("0");
+          System.out.println(paths[i]);
+        }
       }
-      for (int i = 0; i < s; i++) {
-        paths[i] = paths[i].concat("0");
-        System.out.println(paths[i]);
-      }
-      
 
       for (int i = 0; i < s; i++) {
         //paths[i] = paths[i].concat("0");
