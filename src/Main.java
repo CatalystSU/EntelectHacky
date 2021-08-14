@@ -105,11 +105,11 @@ public class Main {
       for (int i = 0; i < s; i++) {
         if (!paths[i].equals("")) {
 
-          if (!paths[i].substring(paths[i].length() - 1, paths[i].length()).equals("0")) {
-            paths[i] = paths[i].concat("0");
-          } else {
+//          if (paths[i].charAt(paths[i].length() - 1) != '0') {
+//            //paths[i] = paths[i].concat("0");
+//          } else {
             paths[i] = paths[i].substring(0, paths[i].length() - 1);
-          }
+        //  }
         }
 
         System.out.println(paths[i]);
