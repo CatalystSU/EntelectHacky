@@ -51,13 +51,29 @@ public class Main {
       for(int i = 0; i< ur; i ++) {
         uRes[i].setCoords(scFile.next());
       }
+
       int temp_cap = 0;
       int temp_quota = 0;
+      System.out.println(uRes[0].getCluser()[0][3]);
+      // string array for each ship
+      String[] paths = {"", "", "", "", "", "", "", "", "", ""};
       for (int i = 0; i < s; i++) {
         temp_cap = 0;
-        //while (temp_cap < c) {
-        for (int j = uRes.length; j > 0; j--) {
-          System.out.println(j);
+        // for each resource type loop
+        for (int j = uRes.length-1; j >= 0; j--) {
+          // for each cluster loop
+          for (int k = 0; k < uRes[j].getCluser().length; k++) {
+            // 0 to 100
+            // go to each cluster and attempt to collect said resource
+            // at 5000 go back to the station
+            if (temp_cap - uRes[j].getCluser()[k][3] < c) {
+              // attempt to gather resources
+              temp_cap += uRes[j].getCluser()[k][3];
+              uRes[j].setResources(k,temp_cap);
+              //paths[i] = paths[i].concat()
+            } 
+          }
+          //System.out.println(j);
           if (temp_cap >= c) {
             break;
           }
