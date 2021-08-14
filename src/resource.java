@@ -1,6 +1,7 @@
 public class resource {
   private int id, numResources, quota;
 
+
   public resource(int id, int numResources) {
     this.id = id;
     this.numResources = numResources;

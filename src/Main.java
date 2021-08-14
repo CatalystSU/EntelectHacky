@@ -8,14 +8,12 @@ import java.util.Scanner;
 
 public class Main {
   private resource[] uRes;
-  private String fName;
 
   public static void main(String[] args) {
     new Main(args[0]);
   }
 
   public Main(String fName) {
-    this.fName = fName;
     // Reading in the file.
     try {
       Scanner scFile = new Scanner(new File(fName + ".txt"));
@@ -45,19 +43,14 @@ public class Main {
       scLine.close();
 
       // reading in the quota.
-      
+      for(int i = 0; i< ur; i++) {
+        scFile.next();
+        uRes[i].setQuota(scFile.nextInt());
+      }
+
 
     } catch (FileNotFoundException e) {
       System.out.println("FIle is not found!");
     }
   }
-
-  // fName - filename
-//  public void save(String out) {
-//    try {
-//      Files.writeString(Paths.get(fName + "Out.txt"), out, StandardCharsets.UTF_8);
-//    } catch (IOException e) {
-//      System.out.println("Could not save file.");
-//    }
-//  }
 }
