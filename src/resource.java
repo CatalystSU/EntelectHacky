@@ -3,6 +3,7 @@ public class resource {
   private char c;
   private int[][] clust;
   private boolean hasRes[];
+  private int required;
 
 
   public resource(int id, int numResources) {
@@ -30,16 +31,12 @@ public class resource {
   }
 
   /**
-   * calculates the total number of resource that is required to be fetched.
+   * number of resource that is required to be fetched.
    *
    * @return The number of resources required according to the quota
    */
   public int getTotalRequiredResources() {
-    int total = 0;
-    for (int i = 0; i < clust.length; i++) {
-      total += clust[i][3];
-    }
-    return total * (quota / 100);
+    return required;
   }
 
   /**
@@ -99,8 +96,10 @@ public class resource {
    */
   public void setCoords(String line) {
     // assigning the clusters here
+    int total = 0;
     clust = new int[numResources][4];
     hasRes = new boolean[numResources];
+
     line = line.substring(line.indexOf("|") + 1);
     for (int i = 0; i < numResources; i++) {
       hasRes[i] = true;
@@ -114,6 +113,9 @@ public class resource {
       if (i != numResources - 1)
         clust[i][3] = Integer.parseInt(line.substring(0, line.indexOf("|")));
       else clust[i][3] = Integer.parseInt(line);
+
+      total += clust[i][3];
     }
+    required = total * (quota / 100);
   }
 }
