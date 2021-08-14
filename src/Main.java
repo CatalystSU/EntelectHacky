@@ -66,9 +66,16 @@ public class Main {
       for (int x = 0; x < 50; x++) {
         for (int i = 0; i < s; i++) {
           temp_cap = 0;
+          boolean tmp = true;
           // for each resource type loop
-          for (int j = uRes.length - 1; j > 0; j--) {
+          for (int j = uRes.length - 1; j >= 0; j--) {
             // for each cluster loop
+            if (j == 0) {
+              tmp = false;
+            } else if (uRes[j].getCompleted() && tmp) {
+              j--;
+            }
+
             for (int k = 0; k < uRes[j].getCluser().length; k++) {
               // 0 to 100
               // go to each cluster and attempt to collect said resource
@@ -85,7 +92,6 @@ public class Main {
                   limit = true;
                   break;
                 }
-
               }
 
             }
