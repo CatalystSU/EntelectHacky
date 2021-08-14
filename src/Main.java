@@ -48,11 +48,11 @@ public class Main {
   }
 
   // fName - filename
-  public void save(String out) {
-    try {
-      Files.writeString(Paths.get(fName + "Out.txt"), out, StandardCharsets.UTF_8);
-    } catch (IOException e) {
-      System.out.println("Could not save file.");
-    }
-  }
+//  public void save(String out) {
+//    try {
+//      Files.writeString(Paths.get(fName + "Out.txt"), out, StandardCharsets.UTF_8);
+//    } catch (IOException e) {
+//      System.out.println("Could not save file.");
+//    }
+//  }
 }
