@@ -51,7 +51,19 @@ public class Main {
       for(int i = 0; i< ur; i ++) {
         uRes[i].setCoords(scFile.next());
       }
-
+      int temp_cap = 0;
+      int temp_quota = 0;
+      for (int i = 0; i < s; i++) {
+        temp_cap = 0;
+        //while (temp_cap < c) {
+        for (int j = uRes.length; j > 0; j--) {
+          System.out.println(j);
+          if (temp_cap >= c) {
+            break;
+          }
+        }
+        //}
+      }
 
     } catch (FileNotFoundException e) {
       System.out.println("FIle is not found!");
