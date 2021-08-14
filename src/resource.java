@@ -13,6 +13,7 @@ public class resource {
 
   /**
    * Sets the quota for instantiating the amount of this resource needed
+   *
    * @param q integer from the text file.
    */
   public void setQuota(int q) {
@@ -21,6 +22,7 @@ public class resource {
 
   /**
    * Gets the quota
+   *
    * @return the quota
    */
   public int getQuota() {
@@ -28,7 +30,21 @@ public class resource {
   }
 
   /**
+   * calculates the total number of resource that is required to be fetched.
+   *
+   * @return The number of resources required according to the quota
+   */
+  public int getTotalRequiredResources() {
+    int total = 0;
+    for (int i = 0; i < clust.length; i++) {
+      total += clust[i][3];
+    }
+    return total * (quota / 100);
+  }
+
+  /**
    * Gets the ID of the cluster
+   *
    * @return the id
    */
   public int getId() {
@@ -37,6 +53,7 @@ public class resource {
 
   /**
    * Get the number of different clusters there are.
+   *
    * @return number of clusters
    */
   public int getResources() {
@@ -67,13 +84,13 @@ public class resource {
 
   /**
    * Seeing how many resources are available in the cluster
-   * @param cluster  the cluster in question
+   *
+   * @param cluster the cluster in question
    * @return the number of resources available
    */
   public int availableResources(int cluster) {
     return clust[cluster][3];
   }
-
 
   /**
    * sets the coordinates from the file for where the clusters are
