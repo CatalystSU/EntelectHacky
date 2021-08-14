@@ -63,6 +63,7 @@ public class Main {
         paths[i] = "";
       }
 
+      for(int x = 0; x < 3; x++) {
       for (int i = 0; i < s; i++) {
         temp_cap = 0;
         // for each resource type loop
@@ -76,7 +77,7 @@ public class Main {
               if (temp_cap - uRes[j].getCluser()[k][3] < c) {
                 // attempt to gather resources
                 temp_cap += uRes[j].getCluser()[k][3];
-                uRes[j].setResources(k , uRes[j].getCluser()[k][3]);
+                uRes[j].setResources(k, uRes[j].getCluser()[k][3]);
                 paths[i] = paths[i].concat(uRes[j].getC() + "" + k + ",");
               } else {
                 paths[i] = paths[i].concat("0");
@@ -92,7 +93,7 @@ public class Main {
             limit = false;
             break;
           }
-
+        }
         }
       }
       for (int i = 0; i < s; i++) {
