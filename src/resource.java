@@ -2,7 +2,7 @@ public class resource {
   private int id, numResources, quota;
   private char c;
   private int[][] clust;
-  private boolean hasRes[], complete = false;
+  private boolean complete = false;
   private int required, collected;
 
 
@@ -84,7 +84,7 @@ public class resource {
    *
    * @return 2D array of the cluster
    */
-  public int[][] getCluser() {
+  public int[][] getCluster() {
     return clust;
   }
 
@@ -97,7 +97,7 @@ public class resource {
   public void setResources(int cluster, int taken) {
     clust[cluster][3] -= taken;
     if (clust[cluster][3] == 0) {
-      hasRes[cluster] = false;
+      clust[cluster][4] = 1;
     }
     resourcesCollected(taken);
   }
@@ -120,12 +120,10 @@ public class resource {
   public void setCoords(String line) {
     // assigning the clusters here
     int total = 0;
-    clust = new int[numResources][4];
-    hasRes = new boolean[numResources];
+    clust = new int[numResources][5];
 
     line = line.substring(line.indexOf("|") + 1);
     for (int i = 0; i < numResources; i++) {
-      hasRes[i] = true;
       line = line.substring(line.indexOf(",") + 1);
       clust[i][0] = Integer.parseInt(line.substring(0, line.indexOf(",")));
       line = line.substring(line.indexOf(",") + 1);
@@ -136,6 +134,7 @@ public class resource {
       if (i != numResources - 1)
         clust[i][3] = Integer.parseInt(line.substring(0, line.indexOf("|")));
       else clust[i][3] = Integer.parseInt(line);
+      clust[i][4] = 0;
 
       total += clust[i][3];
     }

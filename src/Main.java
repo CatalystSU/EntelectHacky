@@ -56,7 +56,7 @@ public class Main {
       }
 
       // Calling the brute force method
-      bruteForce();
+      //bruteForce();
 
       // nearest Neighbour attempt
       nearestNeighbour();
@@ -71,39 +71,95 @@ public class Main {
 
   // Nearest Neighbour Heuristic
   public void nearestNeighbour() {
-    int softCap;
-    int tempCap;
     StringBuilder[] sb = new StringBuilder[s];
+    int count = 0;
+    boolean depleted = false;
+    // Using a counter to check if there are any resources left and if there arent
+    // come back to the depot
+    int totalClust = 0;
+    for (int i = 0; i < uRes.length; i++) {
+      totalClust += uRes[i].getCluster().length;
+    }
 
     for (int i = 0; i < sb.length; i++) {
+      // Initializing the new ships cap and the String for that ship.
       sb[i] = new StringBuilder("");
+      int tempCap = 0;
 
       // initializing the first nodes
       int currentNode[] = {0, 0, 0};
-      int shortestPath[] = uRes[0].getCluster()[0];
-      int minDistance = dis(shortestPath[0], shortestPath[1], shortestPath[2], currentNode[0], currentNode[1], currentNode[2]);
 
-      // Looping through all the resources to find the min distance for the next node;
-      for (int x = 0; x < uRes.length; x++) {
-        // Loop through the number of clusters there are.
-        for (int y = 0; y < uRes[x].getResources(); y++) {
-          // Find the min of the resources
-          if (uRes[x].getCluster()[y][4] == 0) {
+      int maxDistance = 0;
+      int clust = 0, res = 0;
+
+      // do this while the ship is not full
+      while (tempCap < c && !depleted) {
+        // get the one with the max distance first and then the shortest (so that the first one isn't the shortest the whole time
+        for (int x = 0; x < uRes.length; x++) {
+          for (int y = 0; y < uRes[x].getResources(); y++) {
             int tempDistance = dis(uRes[x].getCluster()[y][0], uRes[x].getCluster()[y][1], uRes[x].getCluster()[y][2], currentNode[0], currentNode[1], currentNode[2]);
-            if (tempDistance < minDistance) {
-              minDistance = tempDistance;
-              shortestPath = uRes[x].getCluster()[y];
+            if (tempDistance > maxDistance) {
+              maxDistance = tempDistance;
+              clust = y;
+              res = x;
             }
           }
         }
+        int minDistance = maxDistance;
+        count = 0;
+        // Looping through all the resources to find the min distance for the next node;
+        for (int x = 0; x < uRes.length; x++) {
+          // Loop through the number of clusters there are.
+          for (int y = 0; y < uRes[x].getResources(); y++) {
+            // Find the min of the resources
+            if (uRes[x].getCluster()[y][4] == 0 &&
+                !(uRes[x].getCluster()[y][0] == currentNode[0] && uRes[x].getCluster()[y][1] == currentNode[1] && uRes[x].getCluster()[y][2] == currentNode[2])) {
+              int tempDistance = dis(uRes[x].getCluster()[y][0], uRes[x].getCluster()[y][1], uRes[x].getCluster()[y][2], currentNode[0], currentNode[1], currentNode[2]);
+              if (tempDistance < minDistance) {
+                minDistance = tempDistance;
+                clust = y;
+                res = x;
+              }
+            } else if (uRes[x].getCluster()[y][4] != 0) {
+              count++;
+            }
+          }
+        }
+
+
+        // Should have the position that the ship will be going to.
+        sb[i].append(uRes[res].getC()).append(clust).append(",");
+
+        // Pick up the resources
+        if (count >= totalClust) {
+          sb[i].append("0,");
+          currentNode = new int[3];
+          depleted = true;
+        } else if ((c - tempCap) >= uRes[res].getCluster()[clust][3]) {
+          // add all the resources available to the ship
+          tempCap += uRes[res].getCluster()[clust][3];
+          uRes[res].setResources(clust, uRes[res].getCluster()[clust][3]);
+          currentNode = uRes[res].getCluster()[clust];
+        } else {
+          // Taking the capacity that the ship can take.
+          uRes[res].setResources(clust, (c - tempCap));
+          tempCap = c;
+          currentNode = new int[3];
+          sb[i].append("0,");
+          break;
+        }
       }
-
-      // Should have the position that the ship will be going to.
-      // Pick up the resources
-      
-
-
     }
+
+    // Printing the solution
+    for (int i = 0; i < s; i++) {
+      // removing the comma at the end of the solution
+      if (sb[i].length() > 0) {
+        sb[i].setLength(sb[i].length() - 1);
+      }
+      System.out.println(sb[i].toString());
+    }
+
   }
 
   public int dis(int x1, int y1, int z1, int x0, int y0, int z0) {
