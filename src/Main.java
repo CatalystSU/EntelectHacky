@@ -74,6 +74,7 @@ public class Main {
     StringBuilder[] sb = new StringBuilder[s];
     int count = 0;
     boolean depleted = false;
+    int softCap = 0;
     // Using a counter to check if there are any resources left and if there arent
     // come back to the depot
     int totalClust = 0;
@@ -93,7 +94,7 @@ public class Main {
       int clust = 0, res = 0;
 
       // do this while the ship is not full
-      while (tempCap < c && !depleted) {
+      while (tempCap < c && !depleted && softCap < t) {
         // get the one with the max distance first and then the shortest (so that the first one isn't the shortest the whole time
         for (int x = 0; x < uRes.length; x++) {
           for (int y = 0; y < uRes[x].getResources(); y++) {
