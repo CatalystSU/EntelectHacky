@@ -36,7 +36,6 @@ public class Main {
       uRes = new resource[ur];
       line = scFile.nextLine();
       scLine = new Scanner(line);
-      System.out.println("Test");
 
       for (int i = 0; i < ur; i++) {
         String res = scLine.next();
@@ -66,7 +65,7 @@ public class Main {
 
 
     } catch (FileNotFoundException e) {
-      System.out.println("FIle is not found!");
+      System.out.println("FIle not found!");
     }
   }
 
