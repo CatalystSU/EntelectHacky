@@ -36,6 +36,7 @@ public class Main {
       uRes = new resource[ur];
       line = scFile.nextLine();
       scLine = new Scanner(line);
+      System.out.println("Test");
 
       for (int i = 0; i < ur; i++) {
         String res = scLine.next();
