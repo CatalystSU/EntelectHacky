@@ -1,14 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
   private resource[] uRes;
-  private int ur, s, c, l, t, nq;
+  private int ur, s, c, t;
 
   public static void main(String[] args) {
     new Main(args[0]);
@@ -26,9 +22,9 @@ public class Main {
       ur = scLine.nextInt();
       s = scLine.nextInt();
       c = scLine.nextInt();
-      l = scLine.nextInt();
+      // l = scLine.nextInt();
       t = scLine.nextInt();
-      nq = scLine.nextInt();
+      // nq = scLine.nextInt();
 
       scLine.close();
 
@@ -172,8 +168,8 @@ public class Main {
   // The brute force algo that we used in the comp
   public void bruteForce() {
     int temp_cap = 0;
-    int temp_quota = 0;
-    int soft_cap = t / s;
+    // int temp_quota = 0;
+    // int soft_cap = t / s;
     boolean limit = false;
 
     // string array for each ship
